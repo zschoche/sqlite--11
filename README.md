@@ -1,4 +1,4 @@
-sqlite--11
+sqlite++11
 ==========
 
 SQLite wrapper for C++11 
