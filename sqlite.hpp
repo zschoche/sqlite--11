@@ -74,6 +74,8 @@ struct connection {
 		return result;
 	}
 
+	inline int execute(const std::string& str) { return execute(str.c_str()); }
+
 	int execute(char const *text) {
 		auto const result = sqlite3_exec(handle.get(), text, nullptr, nullptr, nullptr);
 		verify_result(result, handle);
