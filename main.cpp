@@ -23,15 +23,14 @@ int main() {
 		insert.bind(1, 101).bind(2, "Henrietta").step();
 		insert.reset_binding();
 		insert.bind(1, 102).bind(2, "Rowena").step();
-		sqlite::statement select = sqlite::statement::create(c, "select Id, rowid, Name from Hens");
-
-		select.step_all([] (const sqlite::statement& stmt) { 
-			std::cout << "Id:" << stmt.get_int(1) << " Name:" << stmt.get_string(2) <<  std::endl;
-			});
+		sqlite::statement select = sqlite::statement::create(c, "select Id, Name from Hens");
+		while(select.step().has_data()) {
+			std::cout << "Id:" << select.get_int(0) << " Name:" << select.get_string(1) <<  std::endl;
+		}
 
 	}
-	catch (sqlite::sql_exception const &e) {
-		std::cerr << "error(" << e.code << "): " << e.message.c_str() << std::endl;
+	catch (sqlite::sql_error const &e) {
+		std::cerr << "error(" << e.code << "): " << e.what() << std::endl;
 	}
 
 	return 0;

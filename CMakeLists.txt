@@ -5,6 +5,8 @@ project(test)
 add_definitions("-Wall")
 add_definitions("-g")
 add_definitions("-fexceptions")
+add_definitions("-DSQLITE_THREADSAFE=0") #disabled multi-threading for now
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++")	
 
 #libraries
